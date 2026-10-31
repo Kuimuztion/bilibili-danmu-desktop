@@ -1,0 +1,245 @@
+/* SPDX-License-Identifier: GPL-3.0-only */
+/*
+ * Copyright (C) 2026 Kuimuztion
+ *
+ * GTK4 原生桌面弹幕悬浮窗口全局 CSS 样式表
+ * 包含四大品牌皮肤（Google、OpenAI、Anthropic、DeepSeek）气泡样式
+ */
+
+window,
+window.background,
+window.csd,
+window.solid-csd,
+window decoration,
+.background,
+overlay,
+windowhandle {
+	background-color: transparent;
+	background-image: none;
+	background: transparent;
+	box-shadow: none;
+	border: none;
+	font-family: "Google Sans", "Product Sans", Roboto,
+		"Noto Sans CJK SC", "Noto Sans", sans-serif;
+}
+
+/*
+ * 弹幕滚动列表容器使用微透色生成 GSK 渲染节点，
+ * 确保清空时强制提交刷新帧至 Wayland 合成器
+ */
+.danmu-scrolled-win {
+	background-color: rgba(0, 0, 0, 0.004);
+	background: rgba(0, 0, 0, 0.004);
+}
+
+.danmu-list-box {
+	background-color: transparent;
+	background: transparent;
+	padding: 12px 14px;
+}
+
+/* 弹幕主容器与单行条目基础布局 */
+.danmu-container {
+	background-color: transparent;
+	background: transparent;
+}
+
+.danmu-row {
+	margin-bottom: 12px;
+}
+
+/* 弹幕正文内容（高反差清晰排版，字号 16px，深粗体 800） */
+.danmu-text {
+	font-family: "Google Sans", "Product Sans", Roboto,
+		"Noto Sans CJK SC", "Noto Sans", sans-serif;
+	color: #ffffff;
+	font-size: 16px;
+	font-weight: 800;
+	line-height: 1.45;
+	text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9),
+		0 0 1px rgba(0, 0, 0, 0.9);
+}
+
+/* 气泡右下角品牌图标容器与微光投影（兼容通用与 Google 类名） */
+.danmu-google-box,
+.danmu-brand-box {
+	margin-top: 2px;
+}
+
+.danmu-google-icon,
+.danmu-brand-icon {
+	opacity: 0.95;
+	-gtk-icon-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* 悬浮弹幕模式下隐藏滚动条轨道与滑块，保证视觉纯净 */
+scrollbar {
+	opacity: 0;
+}
+
+/* =========================================================================
+ * 1. 默认基础样式与 Google 经典四色皮肤
+ * 融汇 Google 官方经典四色（蓝 #4285f4、红 #ea4335、黄 #fbbc05、绿 #34a853）
+ * ========================================================================= */
+
+/* 圆形头像与 Google 极光蓝微光边框 */
+.danmu-avatar,
+.skin-google .danmu-avatar,
+.danmu-container.skin-google .danmu-avatar {
+	border-radius: 23px;
+	min-width: 46px;
+	min-height: 46px;
+	border: 2px solid rgba(138, 180, 248, 0.65);
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45),
+		0 0 8px rgba(66, 133, 244, 0.25);
+}
+
+/* Google 四色全环绕平滑渐变边框外层容器 */
+.danmu-bubble-border,
+.skin-google .danmu-bubble-border,
+.danmu-container.skin-google .danmu-bubble-border {
+	border-radius: 16px;
+	border-top-left-radius: 4px;
+	padding: 2.5px;
+	background: linear-gradient(135deg,
+		#4285f4 0%,
+		#ea4335 33%,
+		#fbbc05 66%,
+		#34a853 100%);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45),
+		0 0 10px rgba(66, 133, 244, 0.25);
+}
+
+/* 气泡内层深色微透磨砂内容容器 */
+.danmu-bubble-content,
+.skin-google .danmu-bubble-content,
+.danmu-container.skin-google .danmu-bubble-content {
+	border-radius: 14px;
+	border-top-left-radius: 2px;
+	padding: 9px 13px 7px 13px;
+	background-color: rgba(18, 22, 34, 0.88);
+}
+
+/* Google 官方深色模式天蓝色昵称（深粗体 800） */
+.danmu-uname,
+.skin-google .danmu-uname,
+.danmu-container.skin-google .danmu-uname {
+	font-family: "Google Sans", "Product Sans", Roboto,
+		"Noto Sans CJK SC", "Noto Sans", sans-serif;
+	color: #8ab4f8;
+	font-size: 15px;
+	font-weight: 800;
+	margin-bottom: 4px;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* =========================================================================
+ * 2. OpenAI 品牌皮肤
+ * 风格特征：极客黑曜石搭配纯白与 OpenAI 极光绿
+ * ========================================================================= */
+
+/* OpenAI 极光绿头像边框与微光 */
+.skin-openai .danmu-avatar,
+.danmu-container.skin-openai .danmu-avatar {
+	border: 2px solid rgba(16, 163, 127, 0.75);
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45),
+		0 0 8px rgba(16, 163, 127, 0.35);
+}
+
+/* OpenAI 极客黑曜石配极光绿全环绕渐变外框与外阴影 */
+.skin-openai .danmu-bubble-border,
+.danmu-container.skin-openai .danmu-bubble-border {
+	background: linear-gradient(135deg,
+		#10a37f 0%,
+		#20c29b 35%,
+		#ffffff 70%,
+		#10a37f 100%);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45),
+		0 0 12px rgba(16, 163, 127, 0.35);
+}
+
+/* OpenAI 深夜极客深透磨砂气泡背景 */
+.skin-openai .danmu-bubble-content,
+.danmu-container.skin-openai .danmu-bubble-content {
+	background-color: rgba(17, 24, 30, 0.90);
+}
+
+/* OpenAI 明亮薄荷绿昵称 */
+.skin-openai .danmu-uname,
+.danmu-container.skin-openai .danmu-uname {
+	color: #6ee7b7;
+}
+
+/* =========================================================================
+ * 3. Anthropic 品牌皮肤
+ * 风格特征：暖陶土、珊瑚沙岩与自然质感（对应官方 SVG #d97757 暖色）
+ * ========================================================================= */
+
+/* Anthropic 暖陶土珊瑚微光头像边框 */
+.skin-anthropic .danmu-avatar,
+.danmu-container.skin-anthropic .danmu-avatar {
+	border: 2px solid rgba(217, 119, 87, 0.75);
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45),
+		0 0 8px rgba(217, 119, 87, 0.35);
+}
+
+/* Anthropic 暖陶土珊瑚沙岩全环绕渐变外框与外阴影 */
+.skin-anthropic .danmu-bubble-border,
+.danmu-container.skin-anthropic .danmu-bubble-border {
+	background: linear-gradient(135deg,
+		#d97757 0%,
+		#e08b6d 35%,
+		#f5c59f 70%,
+		#cc785c 100%);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45),
+		0 0 12px rgba(217, 119, 87, 0.35);
+}
+
+/* Anthropic 温暖陶土微透磨砂气泡背景 */
+.skin-anthropic .danmu-bubble-content,
+.danmu-container.skin-anthropic .danmu-bubble-content {
+	background-color: rgba(26, 21, 19, 0.90);
+}
+
+/* Anthropic 暖珊瑚粉昵称 */
+.skin-anthropic .danmu-uname,
+.danmu-container.skin-anthropic .danmu-uname {
+	color: #f5a88a;
+}
+
+/* =========================================================================
+ * 4. DeepSeek 品牌皮肤
+ * 风格特征：深海电光蓝与跃动鲸蓝（对应官方 SVG #4d6bfe 电光蓝）
+ * ========================================================================= */
+
+/* DeepSeek 深海电光蓝微光头像边框 */
+.skin-deepseek .danmu-avatar,
+.danmu-container.skin-deepseek .danmu-avatar {
+	border: 2px solid rgba(77, 107, 254, 0.75);
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45),
+		0 0 8px rgba(77, 107, 254, 0.40);
+}
+
+/* DeepSeek 深海电光蓝跃动鲸蓝全环绕渐变外框与外阴影 */
+.skin-deepseek .danmu-bubble-border,
+.danmu-container.skin-deepseek .danmu-bubble-border {
+	background: linear-gradient(135deg,
+		#4d6bfe 0%,
+		#38bdf8 45%,
+		#60a5fa 75%,
+		#2563eb 100%);
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45),
+		0 0 12px rgba(77, 107, 254, 0.40);
+}
+
+/* DeepSeek 跃动深海微透磨砂气泡背景 */
+.skin-deepseek .danmu-bubble-content,
+.danmu-container.skin-deepseek .danmu-bubble-content {
+	background-color: rgba(13, 19, 36, 0.92);
+}
+
+/* DeepSeek 澄澈天蓝昵称 */
+.skin-deepseek .danmu-uname,
+.danmu-container.skin-deepseek .danmu-uname {
+	color: #60a5fa;
+}
